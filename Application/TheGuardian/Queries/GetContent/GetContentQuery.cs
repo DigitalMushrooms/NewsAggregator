@@ -7,6 +7,7 @@ public class GetContentQuery : IRequest
 {
 }
 
+
 public class GetContentQueryHandler : IRequestHandler<GetContentQuery>
 {
     private readonly ITheGuardianApi _theGuardianApi;
@@ -16,9 +17,9 @@ public class GetContentQueryHandler : IRequestHandler<GetContentQuery>
         _theGuardianApi = theGuardianApi;
     }
     
-    public Task<Unit> Handle(GetContentQuery request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(GetContentQuery request, CancellationToken cancellationToken)
     {
-        
-        return Task.FromResult(Unit.Value);
+        await _theGuardianApi.GetContent();
+        return Unit.Value;
     }
 }

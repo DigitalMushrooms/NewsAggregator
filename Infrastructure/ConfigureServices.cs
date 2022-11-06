@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Infrastructure.Http.Builders;
 using Infrastructure.Http.HttpClients;
 using Infrastructure.Http.Options;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,8 @@ public static class ConfigureServices
         services.AddOptions<HttpClientOptions>().Bind(configuration.GetSection(HttpClientOptions.TheGuardianSection));
         
         services.AddHttpClient<ITheGuardianApi, TheGuardianApi>();
+
+        services.AddTransient<GuardianUriBuilder>();
         
         return services;
     }
