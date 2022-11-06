@@ -1,4 +1,4 @@
-namespace Infrastructure.Options;
+namespace Infrastructure.Http.Options;
 
 public class HttpClientOptions
 {

@@ -1,8 +1,8 @@
 using Application.Interfaces;
-using Infrastructure.Options;
+using Infrastructure.Http.Options;
 using Microsoft.Extensions.Options;
 
-namespace Infrastructure.HttpClients;
+namespace Infrastructure.Http.HttpClients;
 
 public class TheGuardianApi : ITheGuardianApi
 {

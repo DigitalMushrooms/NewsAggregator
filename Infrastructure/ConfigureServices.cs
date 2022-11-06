@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces;
-using Infrastructure.HttpClients;
-using Infrastructure.Options;
+using Infrastructure.Http.HttpClients;
+using Infrastructure.Http.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
