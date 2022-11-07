@@ -5,7 +5,6 @@ using Microsoft.Extensions.Options;
 
 namespace Infrastructure.Http.Builders;
 
-// TODO: Create unit test for GuardianUriBuilder.
 public class GuardianUriBuilder
 {
     private readonly HttpClientOptions _options;
