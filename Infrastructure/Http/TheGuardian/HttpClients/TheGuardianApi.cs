@@ -1,15 +1,15 @@
 using Application.Interfaces;
-using Infrastructure.Http.Builders;
+using Infrastructure.Http.TheGuardian.Builders;
 using Newtonsoft.Json;
 
-namespace Infrastructure.Http.HttpClients;
+namespace Infrastructure.Http.TheGuardian.HttpClients;
 
 public class TheGuardianApi : ITheGuardianApi
 {
     private readonly HttpClient _httpClient;
-    private readonly GuardianUriBuilder _uriBuilder;
+    private readonly TheGuardianUriBuilder _uriBuilder;
 
-    public TheGuardianApi(HttpClient httpClient, GuardianUriBuilder uriBuilder)
+    public TheGuardianApi(HttpClient httpClient, TheGuardianUriBuilder uriBuilder)
     {
         _httpClient = httpClient;
         _uriBuilder = uriBuilder;

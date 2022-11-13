@@ -1,7 +1,7 @@
 ﻿using Application.Interfaces;
-using Infrastructure.Http.Builders;
-using Infrastructure.Http.HttpClients;
-using Infrastructure.Http.Options;
+using Infrastructure.Http.TheGuardian.Builders;
+using Infrastructure.Http.TheGuardian.HttpClients;
+using Infrastructure.Http.TheGuardian.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,7 +16,7 @@ public static class ConfigureServices
         
         services.AddHttpClient<ITheGuardianApi, TheGuardianApi>();
 
-        services.AddTransient<GuardianUriBuilder>();
+        services.AddTransient<TheGuardianUriBuilder>();
         
         return services;
     }

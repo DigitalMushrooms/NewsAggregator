@@ -1,17 +1,17 @@
 using System.Collections.Specialized;
 using System.Web;
-using Infrastructure.Http.Options;
+using Infrastructure.Http.TheGuardian.Options;
 using Microsoft.Extensions.Options;
 
-namespace Infrastructure.Http.Builders;
+namespace Infrastructure.Http.TheGuardian.Builders;
 
-public class GuardianUriBuilder
+public class TheGuardianUriBuilder
 {
     private readonly HttpClientOptions _options;
     private readonly UriBuilder _uriBuilder;
     private readonly NameValueCollection _query;
 
-    public GuardianUriBuilder(IOptions<HttpClientOptions> options)
+    public TheGuardianUriBuilder(IOptions<HttpClientOptions> options)
     {
         _options = options.Value;
         _uriBuilder = new UriBuilder(_options.Url);
