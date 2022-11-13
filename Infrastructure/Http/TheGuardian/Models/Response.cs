@@ -1,4 +1,4 @@
-namespace Infrastructure.Http.TheGuardian.Options;
+namespace Infrastructure.Http.TheGuardian.Models;
 
 public class Response
 {
