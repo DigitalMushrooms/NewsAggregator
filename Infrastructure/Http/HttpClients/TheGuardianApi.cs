@@ -7,17 +7,17 @@ namespace Infrastructure.Http.HttpClients;
 public class TheGuardianApi : ITheGuardianApi
 {
     private readonly HttpClient _httpClient;
-    private readonly GuardianUriBuilder _builder;
+    private readonly GuardianUriBuilder _uriBuilder;
 
-    public TheGuardianApi(HttpClient httpClient, GuardianUriBuilder builder)
+    public TheGuardianApi(HttpClient httpClient, GuardianUriBuilder uriBuilder)
     {
         _httpClient = httpClient;
-        _builder = builder;
+        _uriBuilder = uriBuilder;
     }
 
     public async Task GetContent()
     {
-        string url = _builder.Build();
+        string url = _uriBuilder.Build();
         var request = new HttpRequestMessage(HttpMethod.Get, url);
 
         HttpResponseMessage response = await _httpClient.SendAsync(request);
