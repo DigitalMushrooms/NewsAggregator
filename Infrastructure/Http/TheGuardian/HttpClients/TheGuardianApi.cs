@@ -1,5 +1,6 @@
 using Application.Interfaces;
 using Infrastructure.Http.TheGuardian.Builders;
+using Infrastructure.Http.TheGuardian.Models;
 using Newtonsoft.Json;
 
 namespace Infrastructure.Http.TheGuardian.HttpClients;
@@ -28,7 +29,7 @@ public class TheGuardianApi : ITheGuardianApi
         using var streamReader = new StreamReader(responseContent);
         using var jsonTextReader = new JsonTextReader(streamReader);    
         var jsonSerializer = new JsonSerializer();
-        // TODO: Finish the method to return a strongly typed instance.
-        object? deserializedResponse = jsonSerializer.Deserialize(jsonTextReader);
+        var deserializedResponse = jsonSerializer.Deserialize<ResponseWrapper>(jsonTextReader);
+        // TODO: Create domain type and returns it.
     }
 }
