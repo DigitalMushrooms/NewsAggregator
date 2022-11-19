@@ -1,4 +1,4 @@
-﻿using Application.Interfaces;
+﻿using Application.Common.Interfaces;
 using Infrastructure.Http.TheGuardian.Builders;
 using Infrastructure.Http.TheGuardian.HttpClients;
 using Infrastructure.Http.TheGuardian.Options;

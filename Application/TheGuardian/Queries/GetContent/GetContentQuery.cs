@@ -1,4 +1,4 @@
-using Application.Interfaces;
+using Application.Common.Interfaces;
 using MediatR;
 
 namespace Application.TheGuardian.Queries.GetContent;
