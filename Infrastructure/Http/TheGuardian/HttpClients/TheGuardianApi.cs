@@ -1,4 +1,6 @@
 using Application.Common.Interfaces;
+using Application.Common.Models;
+using Domain.Entities;
 using Infrastructure.Http.TheGuardian.Builders;
 using Infrastructure.Http.TheGuardian.Models;
 using Newtonsoft.Json;
@@ -16,20 +18,45 @@ public class TheGuardianApi : ITheGuardianApi
         _uriBuilder = uriBuilder;
     }
 
-    public async Task GetContent()
+    public async Task<PaginatedList<Article>> GetContent()
     {
         string url = _uriBuilder.Build();
         var request = new HttpRequestMessage(HttpMethod.Get, url);
 
-        HttpResponseMessage response = await _httpClient.SendAsync(request);
+        HttpResponseMessage responseMessage = await _httpClient.SendAsync(request);
         
-        await using Stream responseContent = await response.Content.ReadAsStreamAsync();
-        response.EnsureSuccessStatusCode();
+        await using Stream responseContent = await responseMessage.Content.ReadAsStreamAsync();
+        responseMessage.EnsureSuccessStatusCode();
 
         using var streamReader = new StreamReader(responseContent);
         using var jsonTextReader = new JsonTextReader(streamReader);    
         var jsonSerializer = new JsonSerializer();
         var deserializedResponse = jsonSerializer.Deserialize<ResponseWrapper>(jsonTextReader);
-        // TODO: Create domain type and returns it.
+
+        if (deserializedResponse == null)
+        {
+            throw new NullReferenceException("Problem during deserializing response.");
+        }
+
+        PaginatedList<Article> result = ToPaginatedList(deserializedResponse);
+        return result;
+    }
+
+    private static PaginatedList<Article> ToPaginatedList(ResponseWrapper deserializedResponse)
+    {
+        Response response = deserializedResponse.Response;
+        var result = new PaginatedList<Article>
+        {
+            Items = response.Results.Select(r => new Article
+            {
+                Publisher = PublisherName.TheGuardian,
+                PublicationDate = r.WebPublicationDate,
+                Title = r.WebTitle
+            }).ToList(),
+            CurrentPage = response.CurrentPage,
+            Pages = response.Pages,
+            PageSize = response.PageSize
+        };
+        return result;
     }
 }

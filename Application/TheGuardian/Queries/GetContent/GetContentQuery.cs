@@ -1,14 +1,15 @@
 using Application.Common.Interfaces;
+using Application.Common.Models;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.TheGuardian.Queries.GetContent;
 
-public class GetContentQuery : IRequest
+public class GetContentQuery : IRequest<PaginatedList<Article>>
 {
 }
 
-
-public class GetContentQueryHandler : IRequestHandler<GetContentQuery>
+public class GetContentQueryHandler : IRequestHandler<GetContentQuery, PaginatedList<Article>>
 {
     private readonly ITheGuardianApi _theGuardianApi;
 
@@ -17,9 +18,9 @@ public class GetContentQueryHandler : IRequestHandler<GetContentQuery>
         _theGuardianApi = theGuardianApi;
     }
     
-    public async Task<Unit> Handle(GetContentQuery request, CancellationToken cancellationToken)
+    public async Task<PaginatedList<Article>> Handle(GetContentQuery request, CancellationToken cancellationToken)
     {
-        await _theGuardianApi.GetContent();
-        return Unit.Value;
+        PaginatedList<Article> articles = await _theGuardianApi.GetContent();
+        return articles;
     }
 }

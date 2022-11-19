@@ -1,10 +1,6 @@
-using Application.Common.Mappings;
-using AutoMapper;
-using Domain.Entities;
-
 namespace Infrastructure.Http.TheGuardian.Models;
 
-public class Result : IMapFrom<Article>
+public class Result
 {
     public string Id { get; set; } = null!;
     public string Type { get; set; } = null!;
@@ -17,12 +13,4 @@ public class Result : IMapFrom<Article>
     public bool IsHosted { get; set; }
     public string PillarId { get; set; } = null!;
     public string PillarName { get; set; } = null!;
-
-    public void Mapping(Profile profile)
-    {
-        profile.CreateMap<Result, Article>()
-            .ForMember(article => article.Publisher, opt => opt.MapFrom(result => PublisherName.TheGuardian))
-            .ForMember(article => article.PublicationDate, opt => opt.MapFrom(result => result.WebPublicationDate))
-            .ForMember(article => article.Title, opt => opt.MapFrom(result => result.WebTitle));
-    }
 }
