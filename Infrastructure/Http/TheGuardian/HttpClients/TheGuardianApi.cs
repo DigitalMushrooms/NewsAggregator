@@ -49,7 +49,7 @@ public class TheGuardianApi : ITheGuardianApi
         {
             Items = response.Results.Select(r => new Article
             {
-                Publisher = PublisherName.TheGuardian,
+                Id = r.Id,
                 PublicationDate = r.WebPublicationDate,
                 Title = r.WebTitle
             }).ToList(),

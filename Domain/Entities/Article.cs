@@ -1,8 +1,8 @@
 ﻿namespace Domain.Entities;
 
-public class Article : BaseEntity
+public class Article
 {
-    public PublisherName Publisher { get; set; }
+    public string Id { get; set; } = null!;
     public string Title { get; set; } = null!;
     public DateTimeOffset PublicationDate { get; set; }
 }
