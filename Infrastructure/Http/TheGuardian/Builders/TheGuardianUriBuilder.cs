@@ -20,7 +20,7 @@ public class TheGuardianUriBuilder
 
     public string Build()
     {
-        _query["api-key"] = _options.Key;
+        _query[Constants.Url.ApiKey] = _options.Key;
         _uriBuilder.Query = _query.ToString();
         return _uriBuilder.ToString();
     }
