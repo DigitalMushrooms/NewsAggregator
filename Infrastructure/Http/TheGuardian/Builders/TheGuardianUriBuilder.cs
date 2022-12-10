@@ -18,6 +18,18 @@ public class TheGuardianUriBuilder
         _query = HttpUtility.ParseQueryString(string.Empty);
     }
 
+    public TheGuardianUriBuilder WithStarRating(int? rating)
+    {
+        const string starRatingQueryName = "star-rating";
+        if (rating == null)
+        {
+            _query.Remove(starRatingQueryName);
+            return this;
+        }
+        _query[starRatingQueryName] = rating.Value.ToString();
+        return this;
+    }
+
     public string Build()
     {
         _query[Constants.Url.ApiKey] = _options.Key;

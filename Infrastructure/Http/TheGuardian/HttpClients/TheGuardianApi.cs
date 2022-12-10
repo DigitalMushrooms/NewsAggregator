@@ -1,6 +1,7 @@
 using Application.Common.Interfaces;
 using Application.Common.Models;
 using Domain.Entities;
+using Domain.Options.TheGuardian;
 using Infrastructure.Http.TheGuardian.Builders;
 using Infrastructure.Http.TheGuardian.Models;
 using Newtonsoft.Json;
@@ -18,13 +19,14 @@ public class TheGuardianApi : ITheGuardianApi
         _uriBuilder = uriBuilder;
     }
 
-    public async Task<PaginatedList<Article>> GetContent()
+    public async Task<PaginatedList<Article>> GetContent(ContentFilterOptions contentFilters)
     {
-        string url = _uriBuilder.Build();
-        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        string url = _uriBuilder
+            .WithStarRating(contentFilters.StarRating)
+            .Build();
 
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
         HttpResponseMessage responseMessage = await _httpClient.SendAsync(request);
-        
         await using Stream responseContent = await responseMessage.Content.ReadAsStreamAsync();
         responseMessage.EnsureSuccessStatusCode();
 

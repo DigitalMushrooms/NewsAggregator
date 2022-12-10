@@ -2,6 +2,7 @@ using System.Net;
 using Application.Common.Models;
 using AutoFixture;
 using Domain.Entities;
+using Domain.Options.TheGuardian;
 using FluentAssertions;
 using Infrastructure.Http.TheGuardian;
 using Infrastructure.Http.TheGuardian.Builders;
@@ -41,9 +42,10 @@ public class TheGuardianApiTests
             .Respond(HttpStatusCode.InternalServerError);
         var httpClient = MockHttp.ToHttpClient();
         var theGuardianApi = new TheGuardianApi(httpClient, UriBuilder);
+        var options = new ContentFilterOptions();
 
         // Act
-        Func<Task<PaginatedList<Article>>> act = () => theGuardianApi.GetContent();
+        Func<Task<PaginatedList<Article>>> act = () => theGuardianApi.GetContent(options);
 
         // Asset
         await act.Should().ThrowAsync<HttpRequestException>();
